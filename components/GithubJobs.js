@@ -16,9 +16,7 @@ function GithubJobs() {
         setTimeout(() => {
             async function fetchData() {
                 const response = await fetch(CORS + API);
-                console.log(response);
                 const data = await response.json();
-                console.log(data);
                 dispatch({ type: "FETCH_JOBS", githubJob: data });
             }
             fetchData();

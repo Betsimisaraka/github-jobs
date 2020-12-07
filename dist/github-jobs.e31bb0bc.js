@@ -33878,11 +33878,21 @@ function GithubJobsContext({
     switch (action.type) {
       case "FETCH_JOBS":
         {
-          return {
+          return { ...state,
             isLoading: false,
             githubJobs: action.githubJob
           };
         }
+
+      case "SEARCH_GITHUB_JOBS":
+        {
+          return { ...state,
+            githubJobs: action.filteredGithubJobs
+          };
+        }
+
+      default:
+        console.log("Nothing to fetch");
     }
 
     return state;
@@ -35883,20 +35893,54 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _GithubJobsContext = require("../pages/GithubJobsContext");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function GithubJobsHeader() {
+  const [value, setValue] = (0, _react.useState)('');
+  const {
+    state,
+    dispatch
+  } = (0, _react.useContext)(_GithubJobsContext.GlobalContext);
+  const {
+    githubJobs
+  } = state;
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const input = e.target.searchJobs.value;
+    const inputToLowerCase = input.toLowerCase();
+    console.log(inputToLowerCase);
+    const filteredGithubJobs = githubJobs.filter(githubJob => githubJob.title.toLowerCase().includes(inputToLowerCase) || githubJob.company.toLowerCase().includes(inputToLowerCase));
+
+    if (filteredGithubJobs !== inputToLowerCase) {
+      return 'No item muches';
+    }
+
+    dispatch({
+      type: "SEARCH_GITHUB_JOBS",
+      filteredGithubJobs
+    });
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "header_container"
   }, /*#__PURE__*/_react.default.createElement("form", {
-    className: "header_form"
+    className: "header_form",
+    onSubmit: handleSubmit
   }, /*#__PURE__*/_react.default.createElement("fieldset", {
     className: "header_fieldset"
   }, /*#__PURE__*/_react.default.createElement("input", {
     className: "header_input",
     type: "text",
+    value: value,
+    name: "searchJobs",
+    onChange: e => setValue(e.target.value),
     placeholder: "Title, companies, expertise or benefits"
   }), /*#__PURE__*/_react.default.createElement("button", {
     className: "header_button"
@@ -35905,7 +35949,7 @@ function GithubJobsHeader() {
 
 var _default = GithubJobsHeader;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"pages/Options.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../pages/GithubJobsContext":"pages/GithubJobsContext.js"}],"pages/Options.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35978,9 +36022,7 @@ function GithubJobs() {
     setTimeout(() => {
       async function fetchData() {
         const response = await fetch(CORS + API);
-        console.log(response);
         const data = await response.json();
-        console.log(data);
         dispatch({
           type: "FETCH_JOBS",
           githubJob: data
@@ -36022,8 +36064,7 @@ function GithubJobsDetails() {
   } = (0, _reactRouterDom.useParams)();
   console.log(id);
   const {
-    state,
-    dispatch
+    state
   } = (0, _react.useContext)(_GithubJobsContext.GlobalContext);
   const {
     githubJobs

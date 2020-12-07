@@ -7,10 +7,19 @@ function GithubJobsContext({ children }) {
         switch(action.type) {
             case "FETCH_JOBS": {
                 return {
+                    ...state,
                     isLoading: false,
                     githubJobs: action.githubJob
                 }
             }
+            case "SEARCH_GITHUB_JOBS": {
+                return {
+                    ...state,
+                    githubJobs: action.filteredGithubJobs
+                }
+            }
+            default: 
+            console.log("Nothing to fetch");
         }
         return state;
     }, {

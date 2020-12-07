@@ -6,7 +6,7 @@ function GithubJobsDetails() {
     const { id } = useParams();
     console.log(id);
 
-    const { state, dispatch } = useContext(GlobalContext);
+    const { state } = useContext(GlobalContext);
     const { githubJobs } = state;
     console.log(githubJobs);
 
