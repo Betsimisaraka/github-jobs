@@ -33890,9 +33890,6 @@ function GithubJobsContext({
             githubJobs: action.filteredGithubJobs
           };
         }
-
-      default:
-        console.log("Nothing to fetch");
     }
 
     return state;
@@ -35915,17 +35912,12 @@ function GithubJobsHeader() {
     e.preventDefault();
     const input = e.target.searchJobs.value;
     const inputToLowerCase = input.toLowerCase();
-    console.log(inputToLowerCase);
     const filteredGithubJobs = githubJobs.filter(githubJob => githubJob.title.toLowerCase().includes(inputToLowerCase) || githubJob.company.toLowerCase().includes(inputToLowerCase));
-
-    if (filteredGithubJobs !== inputToLowerCase) {
-      return 'No item muches';
-    }
-
     dispatch({
       type: "SEARCH_GITHUB_JOBS",
       filteredGithubJobs
     });
+    setValue('');
   }
 
   return /*#__PURE__*/_react.default.createElement("div", {
@@ -36155,7 +36147,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54727" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62588" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

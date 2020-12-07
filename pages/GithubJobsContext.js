@@ -18,8 +18,6 @@ function GithubJobsContext({ children }) {
                     githubJobs: action.filteredGithubJobs
                 }
             }
-            default: 
-            console.log("Nothing to fetch");
         }
         return state;
     }, {

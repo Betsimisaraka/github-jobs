@@ -10,14 +10,11 @@ function GithubJobsHeader() {
         e.preventDefault();
         const input = e.target.searchJobs.value;
         const inputToLowerCase = input.toLowerCase();
-        console.log(inputToLowerCase);
         const filteredGithubJobs = githubJobs
             .filter(githubJob => githubJob.title.toLowerCase().includes(inputToLowerCase)
             || githubJob.company.toLowerCase().includes(inputToLowerCase));
-            if (filteredGithubJobs !== inputToLowerCase) {
-                return 'No item muches'
-            }
-        dispatch({ type: "SEARCH_GITHUB_JOBS", filteredGithubJobs })
+        dispatch({ type: "SEARCH_GITHUB_JOBS", filteredGithubJobs });
+        setValue('');
     }
 
     return (
