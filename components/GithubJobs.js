@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { GlobalContext } from '../pages/GithubJobsContext';
 import DisplayGithubJobs from '../components/DisplayGithubJobs';
+import { UlStyle } from '../pages/style';
 
 const CORS = "https://cors-anywhere.herokuapp.com/";
 const API = "https://jobs.github.com/positions.json"
@@ -22,16 +23,16 @@ function GithubJobs() {
         }, 500);
     }, [])
 
-    console.log(githubJobs);
-
     return (
         <div>
             <h2>Fetch data</h2>
             {isLoading && 'Loading...'}
-            {!isLoading && 
-            githubJobs.map(githubJob => (
-                <DisplayGithubJobs key={githubJob.id} githubJob={githubJob} />
-            ))}
+            <UlStyle>
+                {!isLoading && 
+                githubJobs.map(githubJob => (
+                    <DisplayGithubJobs key={githubJob.id} githubJob={githubJob} />
+                ))}
+            </UlStyle>
         </div>
     )
 }
