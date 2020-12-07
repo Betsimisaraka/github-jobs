@@ -25,7 +25,6 @@ function GithubJobs() {
 
     return (
         <div>
-            <h2>Fetch data</h2>
             {isLoading && 'Loading...'}
             <UlStyle>
                 {!isLoading && 

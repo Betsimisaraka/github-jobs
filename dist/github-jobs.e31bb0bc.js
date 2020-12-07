@@ -32040,48 +32040,13 @@ exports.ServerStyleSheet = Ue;
 "production" !== "development" && "undefined" != typeof navigator && "ReactNative" === navigator.product && console.warn("It looks like you've imported 'styled-components' on React Native.\nPerhaps you're looking to import 'styled-components/native'?\nRead more about this at https://www.styled-components.com/docs/basics#react-native"), "production" !== "development" && "test" !== "development" && (window["__styled-components-init__"] = window["__styled-components-init__"] || 0, 1 === window["__styled-components-init__"] && console.warn("It looks like there are several instances of 'styled-components' initialized in this application. This may cause dynamic styles to not render properly, errors during the rehydration process, a missing theme prop, and makes your application bigger without good reason.\n\nSee https://s-c.sh/2BAXzed for more info."), window["__styled-components-init__"] += 1);
 var _default = qe;
 exports.default = _default;
-},{"react-is":"node_modules/react-is/index.js","react":"node_modules/react/index.js","shallowequal":"node_modules/shallowequal/index.js","@emotion/stylis":"node_modules/@emotion/stylis/dist/stylis.browser.esm.js","@emotion/unitless":"node_modules/@emotion/unitless/dist/unitless.browser.esm.js","@emotion/is-prop-valid":"node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js","hoist-non-react-statics":"node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js","process":"../../AppData/Roaming/npm/node_modules/parcel-bundler/node_modules/process/browser.js"}],"components/DisplayGithubJobs.js":[function(require,module,exports) {
+},{"react-is":"node_modules/react-is/index.js","react":"node_modules/react/index.js","shallowequal":"node_modules/shallowequal/index.js","@emotion/stylis":"node_modules/@emotion/stylis/dist/stylis.browser.esm.js","@emotion/unitless":"node_modules/@emotion/unitless/dist/unitless.browser.esm.js","@emotion/is-prop-valid":"node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js","hoist-non-react-statics":"node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js","process":"../../AppData/Roaming/npm/node_modules/parcel-bundler/node_modules/process/browser.js"}],"pages/style.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _styledComponents = _interopRequireDefault(require("styled-components"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const GithubJobsStyle = _styledComponents.default.li`
-    dispaly: grid;
-    grid-tempate-columns: auto 1fr 1fr;
-    column-gap: 20px;
-    img {
-        width: 100%;
-        border-radius: 4px;
-    }
-`;
-
-function DisplayGithubJobs({
-  githubJob
-}) {
-  return /*#__PURE__*/_react.default.createElement(GithubJobsStyle, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: githubJob.company_logo,
-    alt: ""
-  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, githubJob.company), /*#__PURE__*/_react.default.createElement("h2", null, githubJob.title), /*#__PURE__*/_react.default.createElement("p", null, githubJob.type)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, githubJob.location), /*#__PURE__*/_react.default.createElement("p", null, githubJob.created_at)));
-}
-
-var _default = DisplayGithubJobs;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"pages/style.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.UlStyle = void 0;
+exports.GithubJobsStyle = exports.UlStyle = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -32093,7 +32058,42 @@ const UlStyle = _styledComponents.default.ul`
     padding: 0;
 `;
 exports.UlStyle = UlStyle;
-},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/GithubJobs.js":[function(require,module,exports) {
+const GithubJobsStyle = _styledComponents.default.li`
+    dispaly: grid;
+    grid-tempate-columns: auto 1fr 1fr;
+    column-gap: 20px;
+    img {
+        width: 100%;
+        border-radius: 4px;
+    }
+`;
+exports.GithubJobsStyle = GithubJobsStyle;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"components/DisplayGithubJobs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _style = require("../pages/style");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function DisplayGithubJobs({
+  githubJob
+}) {
+  return /*#__PURE__*/_react.default.createElement(_style.GithubJobsStyle, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: githubJob.company_logo,
+    alt: ""
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, githubJob.company), /*#__PURE__*/_react.default.createElement("h2", null, githubJob.title), /*#__PURE__*/_react.default.createElement("p", null, githubJob.type)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, githubJob.location), /*#__PURE__*/_react.default.createElement("p", null, githubJob.created_at)));
+}
+
+var _default = DisplayGithubJobs;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../pages/style":"pages/style.js"}],"components/GithubJobs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32143,7 +32143,7 @@ function GithubJobs() {
       fetchData();
     }, 500);
   }, []);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Fetch data"), isLoading && 'Loading...', /*#__PURE__*/_react.default.createElement(_style.UlStyle, null, !isLoading && githubJobs.map(githubJob => /*#__PURE__*/_react.default.createElement(_DisplayGithubJobs.default, {
+  return /*#__PURE__*/_react.default.createElement("div", null, isLoading && 'Loading...', /*#__PURE__*/_react.default.createElement(_style.UlStyle, null, !isLoading && githubJobs.map(githubJob => /*#__PURE__*/_react.default.createElement(_DisplayGithubJobs.default, {
     key: githubJob.id,
     githubJob: githubJob
   }))));
@@ -32164,9 +32164,19 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function GithubJobsHeader() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "text"
-  }), /*#__PURE__*/_react.default.createElement("button", null, "Search"))));
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "header_container"
+  }, /*#__PURE__*/_react.default.createElement("form", {
+    className: "header_form"
+  }, /*#__PURE__*/_react.default.createElement("fieldset", {
+    className: "header_fieldset"
+  }, /*#__PURE__*/_react.default.createElement("input", {
+    className: "header_input",
+    type: "text",
+    placeholder: "Title, companies, expertise or benefits"
+  }), /*#__PURE__*/_react.default.createElement("button", {
+    className: "header_button"
+  }, "Search"))));
 }
 
 var _default = GithubJobsHeader;
