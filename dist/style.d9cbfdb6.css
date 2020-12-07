@@ -38,4 +38,11 @@ ul {
   row-gap: 32px;
 }
 
+.main_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 42px;
+}
+
 /*# sourceMappingURL=/style.d9cbfdb6.css.map */

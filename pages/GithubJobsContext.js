@@ -18,6 +18,18 @@ function GithubJobsContext({ children }) {
                     githubJobs: action.filteredGithubJobs
                 }
             }
+            case  "FULL_TIME": {
+                return {
+                    ...state,
+                    githubJobs: action.filteredTheFullTimeJob
+                }
+            }
+            case  "CITY": {
+                return {
+                    ...state,
+                    githubJobs: action.filteredTheCityJob
+                }
+            }
         }
         return state;
     }, {

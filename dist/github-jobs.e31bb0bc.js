@@ -33890,6 +33890,20 @@ function GithubJobsContext({
             githubJobs: action.filteredGithubJobs
           };
         }
+
+      case "FULL_TIME":
+        {
+          return { ...state,
+            githubJobs: action.filteredTheFullTimeJob
+          };
+        }
+
+      case "CITY":
+        {
+          return { ...state,
+            githubJobs: action.filteredTheCityJob
+          };
+        }
     }
 
     return state;
@@ -35949,30 +35963,98 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
+
+var _GithubJobs = _interopRequireDefault(require("../components/GithubJobs"));
+
+var _GithubJobsContext = require("../pages/GithubJobsContext");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 function Options() {
+  const [city, setCity] = (0, _react.useState)('');
+  const [isChecked, setIsChecked] = (0, _react.useState)(false);
+  const {
+    state,
+    dispatch
+  } = (0, _react.useContext)(_GithubJobsContext.GlobalContext);
+  const {
+    githubJobs
+  } = state;
+  console.log(isChecked);
+
+  function handleTheFullTimeJob(e) {
+    const {
+      name,
+      type,
+      checked
+    } = e.target;
+    type === "checkbox" && setIsChecked({
+      [name]: checked
+    });
+    const filteredTheFullTimeJob = githubJobs.filter(githubJob => githubJob.type !== "Full time");
+    console.log(filteredTheFullTimeJob);
+    dispatch({
+      type: "FULL_TIME",
+      filteredTheFullTimeJob
+    });
+  }
+
+  (0, _react.useEffect)(() => {
+    const filteredTheCityJob = githubJobs.filter(githubJob => githubJob.location.toLowerCase().includes(city.toLowerCase()));
+    dispatch({
+      type: "CITY",
+      filteredTheCityJob
+    });
+  }, [city]);
+
+  function handleChange(e) {
+    const {
+      name,
+      type,
+      checked
+    } = e.target;
+    type === "checkbox" && setIsChecked({
+      [name]: checked
+    });
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "checkbox"
+    type: "checkbox",
+    name: "fullTime",
+    onChange: handleTheFullTimeJob
   }), /*#__PURE__*/_react.default.createElement("label", null, "Full time")), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("label", null, "Location"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
+    value: city,
+    name: "location",
+    onChange: e => setCity(e.target.value),
     placeholder: "City, state, zip code or country"
   })), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "checkbox"
+    type: "checkbox",
+    name: "london",
+    onChange: handleChange
   }), /*#__PURE__*/_react.default.createElement("label", null, "London")), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "checkbox"
+    type: "checkbox",
+    name: "amsterdam",
+    onChange: handleChange
   }), /*#__PURE__*/_react.default.createElement("label", null, "Amsterdam")), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "checkbox"
+    type: "checkbox",
+    name: "newWork",
+    onChange: handleChange
   }), /*#__PURE__*/_react.default.createElement("label", null, "New Work")), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "checkbox"
-  }), /*#__PURE__*/_react.default.createElement("label", null, "Belin"))));
+    type: "checkbox",
+    name: "berlin",
+    onChange: handleChange
+  }), /*#__PURE__*/_react.default.createElement("label", null, "Berlin"))));
 }
 
 var _default = Options;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"components/GithubJobs.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components/GithubJobs":"components/GithubJobs.js","../pages/GithubJobsContext":"pages/GithubJobsContext.js"}],"components/GithubJobs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35999,7 +36081,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 const CORS = "https://cors-anywhere.herokuapp.com/";
-const API = "https://jobs.github.com/positions.json";
+const API = "https://jobs.github.com/positions.json?search=node";
 
 function GithubJobs() {
   const {
@@ -36010,6 +36092,7 @@ function GithubJobs() {
     githubJobs,
     isLoading
   } = state;
+  console.log(githubJobs);
   (0, _react.useEffect)(() => {
     setTimeout(() => {
       async function fetchData() {
@@ -36024,10 +36107,12 @@ function GithubJobs() {
       fetchData();
     }, 500);
   }, []);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_GithubJobsHeader.default, null), isLoading && 'Loading...', /*#__PURE__*/_react.default.createElement(_style.UlStyle, null, !isLoading && githubJobs.map(githubJob => /*#__PURE__*/_react.default.createElement(_DisplayGithubJobs.default, {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_GithubJobsHeader.default, null), /*#__PURE__*/_react.default.createElement("div", {
+    className: "main_container"
+  }, /*#__PURE__*/_react.default.createElement(_Options.default, null), isLoading && 'Loading...', /*#__PURE__*/_react.default.createElement(_style.UlStyle, null, !isLoading && githubJobs.map(githubJob => /*#__PURE__*/_react.default.createElement(_DisplayGithubJobs.default, {
     key: githubJob.id,
     githubJob: githubJob
-  }))), /*#__PURE__*/_react.default.createElement(_Options.default, null));
+  })))));
 }
 
 var _default = GithubJobs;

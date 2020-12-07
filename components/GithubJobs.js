@@ -6,11 +6,12 @@ import GithubJobsHeader from '../pages/GithubJobsHeader';
 import Options from '../pages/Options';
 
 const CORS = "https://cors-anywhere.herokuapp.com/";
-const API = "https://jobs.github.com/positions.json"
+const API = "https://jobs.github.com/positions.json?search=node";
 
 function GithubJobs() {
     const { state, dispatch } = useContext(GlobalContext);
     const { githubJobs, isLoading } = state;
+    console.log(githubJobs);
 
     useEffect(() => {
         setTimeout(() => {
@@ -26,14 +27,16 @@ function GithubJobs() {
     return (
         <div>
             <GithubJobsHeader />
-            {isLoading && 'Loading...'}
-            <UlStyle>
-                {!isLoading && 
-                githubJobs.map(githubJob => (
-                    <DisplayGithubJobs key={githubJob.id} githubJob={githubJob} />
-                ))}
-            </UlStyle>
-            <Options />
+            <div className="main_container">    
+                <Options />
+                {isLoading && 'Loading...'}
+                <UlStyle>
+                    {!isLoading && 
+                    githubJobs.map(githubJob => (
+                        <DisplayGithubJobs key={githubJob.id} githubJob={githubJob} />
+                    ))}
+                </UlStyle>
+            </div>
         </div>
     )
 }
