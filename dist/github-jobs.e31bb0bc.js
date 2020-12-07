@@ -29772,7 +29772,51 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"pages/App.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"pages/GithubJobsContext.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GithubJobsContext = GithubJobsContext;
+exports.GlobalContext = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+const GlobalContext = (0, _react.createContext)();
+exports.GlobalContext = GlobalContext;
+
+function GithubJobsContext({
+  children
+}) {
+  const [state, dispatch] = (0, _react.useReducer)((state, action) => {
+    switch (action.type) {
+      case "FETCH_JOBS":
+        {
+          return {
+            isLoading: false,
+            githubJobs: action.githubJob
+          };
+        }
+    }
+
+    return state;
+  }, {
+    isLoading: true,
+    githubJobs: []
+  });
+  return /*#__PURE__*/_react.default.createElement(GlobalContext.Provider, {
+    value: {
+      state,
+      dispatch
+    }
+  }, children);
+}
+},{"react":"node_modules/react/index.js"}],"components/DisplayGithubJobs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29784,13 +29828,117 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function DisplayGithubJobs({
+  githubJob
+}) {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
+    src: githubJob.company_logo,
+    alt: ""
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, githubJob.company), /*#__PURE__*/_react.default.createElement("h2", null, githubJob.title), /*#__PURE__*/_react.default.createElement("p", null, githubJob.type)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, githubJob.location), /*#__PURE__*/_react.default.createElement("p", null, githubJob.created_at)));
+}
+
+var _default = DisplayGithubJobs;
+exports.default = _default;
+},{"react":"node_modules/react/index.js"}],"components/GithubJobs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _GithubJobsContext = require("../pages/GithubJobsContext");
+
+var _DisplayGithubJobs = _interopRequireDefault(require("../components/DisplayGithubJobs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+const CORS = "https://cors-anywhere.herokuapp.com/";
+const API = "https://jobs.github.com/positions.json";
+
+function GithubJobs() {
+  const {
+    state,
+    dispatch
+  } = (0, _react.useContext)(_GithubJobsContext.GlobalContext);
+  const {
+    githubJobs,
+    isLoading
+  } = state;
+  (0, _react.useEffect)(() => {
+    setTimeout(() => {
+      async function fetchData() {
+        const response = await fetch(CORS + API);
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+        dispatch({
+          type: "FETCH_JOBS",
+          githubJob: data
+        });
+      }
+
+      fetchData();
+    }, 500);
+  }, []);
+  console.log(githubJobs);
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Fetch data"), isLoading && 'Loading...', !isLoading && githubJobs.map(githubJob => /*#__PURE__*/_react.default.createElement(_DisplayGithubJobs.default, {
+    key: githubJob.id,
+    githubJob: githubJob
+  })));
+}
+
+var _default = GithubJobs;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../pages/GithubJobsContext":"pages/GithubJobsContext.js","../components/DisplayGithubJobs":"components/DisplayGithubJobs.js"}],"pages/GithubJobsHeader.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function GithubJobsHeader() {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
+    type: "text"
+  }), /*#__PURE__*/_react.default.createElement("button", null, "Search"))));
+}
+
+var _default = GithubJobsHeader;
+exports.default = _default;
+},{"react":"node_modules/react/index.js"}],"pages/App.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _GithubJobs = _interopRequireDefault(require("../components/GithubJobs"));
+
+var _GithubJobsHeader = _interopRequireDefault(require("./GithubJobsHeader"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function App() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "My github jobs"));
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "My github jobs"), /*#__PURE__*/_react.default.createElement(_GithubJobsHeader.default, null), /*#__PURE__*/_react.default.createElement(_GithubJobs.default, null));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components/GithubJobs":"components/GithubJobs.js","./GithubJobsHeader":"pages/GithubJobsHeader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -29799,10 +29947,12 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _App = _interopRequireDefault(require("./pages/App"));
 
+var _GithubJobsContext = require("./pages/GithubJobsContext");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom.default.render( /*#__PURE__*/_react.default.createElement(_App.default, null), document.getElementById('root'));
-},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./pages/App":"pages/App.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+_reactDom.default.render( /*#__PURE__*/_react.default.createElement(_GithubJobsContext.GithubJobsContext, null, /*#__PURE__*/_react.default.createElement(_App.default, null)), document.getElementById('root'));
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./pages/App":"pages/App.js","./pages/GithubJobsContext":"pages/GithubJobsContext.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -29830,7 +29980,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50600" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52873" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
