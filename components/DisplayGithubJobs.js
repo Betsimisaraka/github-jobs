@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {GithubJobsStyle} from '../pages/style';
 
 
@@ -8,7 +9,7 @@ function DisplayGithubJobs({ githubJob }) {
             <img src={githubJob.company_logo} alt="" />
             <div>
                 <p>{githubJob.company}</p>    
-                <h2>{githubJob.title}</h2>
+                <h2><Link to={`/details/${githubJob.id}`}>{githubJob.title}</Link></h2>
                 <p>{githubJob.type}</p>
             </div>
             <div>

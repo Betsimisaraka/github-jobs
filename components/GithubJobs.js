@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import { GlobalContext } from '../pages/GithubJobsContext';
 import DisplayGithubJobs from '../components/DisplayGithubJobs';
 import { UlStyle } from '../pages/style';
+import GithubJobsHeader from '../pages/GithubJobsHeader';
+import Options from '../pages/Options';
 
 const CORS = "https://cors-anywhere.herokuapp.com/";
 const API = "https://jobs.github.com/positions.json"
@@ -25,6 +27,7 @@ function GithubJobs() {
 
     return (
         <div>
+            <GithubJobsHeader />
             {isLoading && 'Loading...'}
             <UlStyle>
                 {!isLoading && 
@@ -32,6 +35,7 @@ function GithubJobs() {
                     <DisplayGithubJobs key={githubJob.id} githubJob={githubJob} />
                 ))}
             </UlStyle>
+            <Options />
         </div>
     )
 }

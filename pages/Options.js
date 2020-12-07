@@ -10,22 +10,22 @@ function Options() {
                 </fieldset>
                 <fieldset>
                     <label>Location</label>
-                    <input type="text" name="" value="" placeholder="City, state, zip code or country" />
+                    <input type="text" placeholder="City, state, zip code or country" />
                 </fieldset>
                 <fieldset>
-                    <input type="text" />
+                    <input type="checkbox" />
                     <label>London</label>
                 </fieldset>
                 <fieldset>
-                    <input type="text" />
+                    <input type="checkbox" />
                     <label>Amsterdam</label>
                 </fieldset>
                 <fieldset>
-                    <input type="text" />
+                    <input type="checkbox" />
                     <label>New Work</label>
                 </fieldset>
                 <fieldset>
-                    <input type="text" />
+                    <input type="checkbox" />
                     <label>Belin</label>
                 </fieldset>
             </form>

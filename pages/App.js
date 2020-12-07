@@ -1,13 +1,20 @@
 import React from 'react';
-import GithubJobs from '../components/GithubJobs';
-import GithubJobsHeader from './GithubJobsHeader';
+import { Route, Switch } from 'react-router-dom';
+import GithubJobs from '../components/GithubJobs'; 
+import GithubJobsDetails from '../components/GithubJobsDetails';
 
 function App() {
     return (
         <div>
-            <h1>My github jobs</h1>
-            <GithubJobsHeader />
-            <GithubJobs />
+            <h1>Github jobs</h1>
+            <Switch>
+                <Route exact path="/">
+                    <GithubJobs />
+                </Route>
+                <Route path="/details/:id">
+                    <GithubJobsDetails />
+                </Route>
+            </Switch>
         </div>
     )
 }
