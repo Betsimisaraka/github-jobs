@@ -3,6 +3,26 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    height: 138px;
+    border-radius: 8px;
+    display: flex;
+    
+    & .header_form {
+        // width: 790px;
+        height: 55px;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        border: none;
+        margin-right: auto;
+        margin-left: auto;
+        align-self: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
 }
 
 .header_button {
@@ -14,4 +34,14 @@
     font-size: 16px;
     line-height: 19px;
     color: #FFFFFF;
+    padding: 14px 48px;
+    border: none;
+    margin-right: 4px;
+}
+
+.header_input {
+    // width: 100%;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border: none;
 }

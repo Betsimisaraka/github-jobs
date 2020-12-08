@@ -1,0 +1,38 @@
+.options_form {
+    & fieldset {
+        border: none;
+        & label:not(.options_location-label) {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            color: #334680;
+            margin-left: 12px;
+        }
+    }
+}
+
+.options_location {
+    display: flex;
+    flex-direction: column;
+}
+
+.options_location-label {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 21px;
+    text-transform: uppercase;
+    color: #B9BDCF;
+    padding-bottom: 14px;
+}
+
+.options_location-input {
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    padding: 17px 14px;
+    border: none;
+}

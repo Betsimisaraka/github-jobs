@@ -14,24 +14,24 @@ function GithubJobsDetails() {
     console.log(findTheSameId);
 
     return (
-        <div>
-            <div>
-                <p><Link to="/">⬅ Back to search</Link></p>
-                <p>How to upplay</p>
+        <div className="details">
+            <div className="more_info">
+                <p><Link to="/" className="go_back">⬅ Back to search</Link></p>
+                <p className="apply">How to upply</p>
                 <p>{findTheSameId.how_to_apply}</p>    
             </div>
             <div>
-                <div>
-                    <h2>{findTheSameId.title}</h2>
-                    <p>{findTheSameId.type}</p>
-                    <p>{findTheSameId.created_at}</p>
+                <div className="title_type_creation">
+                    <h2 className="detail_title">{findTheSameId.title}</h2>
+                    <p className="type detail_type">{findTheSameId.type}</p>
+                    <p className="creation detail_creation">{findTheSameId.created_at}</p>
                 </div>
-                <div>
-                    <img src={findTheSameId.company_logo} alt={`Logo of this componey ${findTheSameId.company}`} />
-                    <h3>{findTheSameId.company}</h3>
-                    <p>{findTheSameId.location}</p>
+                <div className="logo_company_location">
+                    <img className="detail_logo" src={findTheSameId.company_logo} alt={`Logo of this componey ${findTheSameId.company}`} />
+                    <h3 className="detail_company">{findTheSameId.company}</h3>
+                    <p className="detail_location">{findTheSameId.location}</p>
                 </div>
-                <p>{findTheSameId.description}</p>
+                <p className="description">{findTheSameId.description}</p>
             </div>
         </div>
     )

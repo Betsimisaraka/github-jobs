@@ -74,14 +74,14 @@ function Options() {
 
     return (
         <div>
-            <form>
+            <form className="options_form">
                 <fieldset>
                     <input type="checkbox" name="fullTime" onChange={handleTheFullTimeJob} />
                     <label>Full time</label>
                 </fieldset>
-                <fieldset>
-                    <label>Location</label>
-                    <input type="text" value={city} name="location" onChange={e => setCity(e.target.value)} placeholder="City, state, zip code or country" />
+                <fieldset className="options_location">
+                    <label className="options_location-label">Location</label>
+                    <input className="options_location-input" type="text" value={city} name="location" onChange={e => setCity(e.target.value)} placeholder="City, state, zip code or country" />
                 </fieldset>
                 <fieldset>
                     <input type="checkbox" name="london" onChange={handleLondonJob} />

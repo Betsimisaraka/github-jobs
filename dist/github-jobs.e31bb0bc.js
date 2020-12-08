@@ -33879,7 +33879,6 @@ function GithubJobsContext({
       case "DEFAULT":
         {
           return { ...state,
-            isLoading: false,
             githubJobs: action.data
           };
         }
@@ -33887,6 +33886,7 @@ function GithubJobsContext({
       case "FETCH_JOBS":
         {
           return { ...state,
+            isLoading: false,
             githubJobs: action.githubJob
           };
         }
@@ -35914,12 +35914,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function DisplayGithubJobs({
   githubJob
 }) {
-  return /*#__PURE__*/_react.default.createElement(_style.GithubJobsStyle, null, /*#__PURE__*/_react.default.createElement("img", {
+  return /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: `/details/${githubJob.id}`
+  }, /*#__PURE__*/_react.default.createElement(_style.GithubJobsStyle, null, /*#__PURE__*/_react.default.createElement("img", {
+    className: "logo",
     src: githubJob.company_logo,
     alt: ""
-  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, githubJob.company), /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: `/details/${githubJob.id}`
-  }, githubJob.title)), /*#__PURE__*/_react.default.createElement("p", null, githubJob.type)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, githubJob.location), /*#__PURE__*/_react.default.createElement("p", null, githubJob.created_at)));
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    className: "info_container"
+  }, /*#__PURE__*/_react.default.createElement("p", {
+    className: "company"
+  }, githubJob.company), /*#__PURE__*/_react.default.createElement("h2", {
+    className: "title"
+  }, githubJob.title), /*#__PURE__*/_react.default.createElement("p", {
+    className: "type"
+  }, githubJob.type)), /*#__PURE__*/_react.default.createElement("p", {
+    className: "location-city"
+  }, githubJob.location), /*#__PURE__*/_react.default.createElement("p", {
+    className: "creation"
+  }, githubJob.created_at)));
 }
 
 var _default = DisplayGithubJobs;
@@ -35967,8 +35980,6 @@ function GithubJobsHeader() {
   }, /*#__PURE__*/_react.default.createElement("form", {
     className: "header_form",
     onSubmit: handleSubmit
-  }, /*#__PURE__*/_react.default.createElement("fieldset", {
-    className: "header_fieldset"
   }, /*#__PURE__*/_react.default.createElement("input", {
     className: "header_input",
     type: "text",
@@ -35978,7 +35989,7 @@ function GithubJobsHeader() {
     placeholder: "Title, companies, expertise or benefits"
   }), /*#__PURE__*/_react.default.createElement("button", {
     className: "header_button"
-  }, "Search"))));
+  }, "Search")));
 }
 
 var _default = GithubJobsHeader;
@@ -36098,11 +36109,18 @@ function Options() {
     }
   }
 
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("form", {
+    className: "options_form"
+  }, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "checkbox",
     name: "fullTime",
     onChange: handleTheFullTimeJob
-  }), /*#__PURE__*/_react.default.createElement("label", null, "Full time")), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("label", null, "Location"), /*#__PURE__*/_react.default.createElement("input", {
+  }), /*#__PURE__*/_react.default.createElement("label", null, "Full time")), /*#__PURE__*/_react.default.createElement("fieldset", {
+    className: "options_location"
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    className: "options_location-label"
+  }, "Location"), /*#__PURE__*/_react.default.createElement("input", {
+    className: "options_location-input",
     type: "text",
     value: city,
     name: "location",
@@ -36225,12 +36243,36 @@ function GithubJobsDetails() {
   console.log(githubJobs);
   const findTheSameId = githubJobs.find(githubJob => githubJob.id !== id);
   console.log(findTheSameId);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/"
-  }, "\u2B05 Back to search")), /*#__PURE__*/_react.default.createElement("p", null, "How to upplay"), /*#__PURE__*/_react.default.createElement("p", null, findTheSameId.how_to_apply)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, findTheSameId.title), /*#__PURE__*/_react.default.createElement("p", null, findTheSameId.type), /*#__PURE__*/_react.default.createElement("p", null, findTheSameId.created_at)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "details"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "more_info"
+  }, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/",
+    className: "go_back"
+  }, "\u2B05 Back to search")), /*#__PURE__*/_react.default.createElement("p", {
+    className: "apply"
+  }, "How to upply"), /*#__PURE__*/_react.default.createElement("p", null, findTheSameId.how_to_apply)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "title_type_creation"
+  }, /*#__PURE__*/_react.default.createElement("h2", {
+    className: "detail_title"
+  }, findTheSameId.title), /*#__PURE__*/_react.default.createElement("p", {
+    className: "type detail_type"
+  }, findTheSameId.type), /*#__PURE__*/_react.default.createElement("p", {
+    className: "creation detail_creation"
+  }, findTheSameId.created_at)), /*#__PURE__*/_react.default.createElement("div", {
+    className: "logo_company_location"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    className: "detail_logo",
     src: findTheSameId.company_logo,
     alt: `Logo of this componey ${findTheSameId.company}`
-  }), /*#__PURE__*/_react.default.createElement("h3", null, findTheSameId.company), /*#__PURE__*/_react.default.createElement("p", null, findTheSameId.location)), /*#__PURE__*/_react.default.createElement("p", null, findTheSameId.description)));
+  }), /*#__PURE__*/_react.default.createElement("h3", {
+    className: "detail_company"
+  }, findTheSameId.company), /*#__PURE__*/_react.default.createElement("p", {
+    className: "detail_location"
+  }, findTheSameId.location)), /*#__PURE__*/_react.default.createElement("p", {
+    className: "description"
+  }, findTheSameId.description)));
 }
 
 var _default = GithubJobsDetails;

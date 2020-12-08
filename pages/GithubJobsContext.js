@@ -8,13 +8,13 @@ function GithubJobsContext({ children }) {
             case "DEFAULT": {
                 return {
                     ...state,
-                    isLoading: false,
                     githubJobs: action.data
                 }
             }
             case "FETCH_JOBS": {
                 return {
                     ...state,
+                    isLoading: false,
                     githubJobs: action.githubJob
                 }
             }
