@@ -33876,10 +33876,17 @@ function GithubJobsContext({
 }) {
   const [state, dispatch] = (0, _react.useReducer)((state, action) => {
     switch (action.type) {
-      case "FETCH_JOBS":
+      case "DEFAULT":
         {
           return { ...state,
             isLoading: false,
+            githubJobs: action.data
+          };
+        }
+
+      case "FETCH_JOBS":
+        {
+          return { ...state,
             githubJobs: action.githubJob
           };
         }
@@ -33902,6 +33909,27 @@ function GithubJobsContext({
         {
           return { ...state,
             githubJobs: action.filteredTheCityJob
+          };
+        }
+
+      case "LONDON":
+        {
+          return { ...state,
+            githubJobs: action.filteredLondonJob
+          };
+        }
+
+      case "AMSTERDAM":
+        {
+          return { ...state,
+            githubJobs: action.filteredAmsterdamJob
+          };
+        }
+
+      case "BERLIN":
+        {
+          return { ...state,
+            githubJobs: action.filteredBerlinJob
           };
         }
     }
@@ -35965,11 +35993,9 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _GithubJobs = _interopRequireDefault(require("../components/GithubJobs"));
-
 var _GithubJobsContext = require("../pages/GithubJobsContext");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _GithubJobs = require("../components/GithubJobs");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -35977,7 +36003,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function Options() {
   const [city, setCity] = (0, _react.useState)('');
-  const [isChecked, setIsChecked] = (0, _react.useState)(false);
+  const [checked, setChecked] = (0, _react.useState)(true);
   const {
     state,
     dispatch
@@ -35985,23 +36011,24 @@ function Options() {
   const {
     githubJobs
   } = state;
-  console.log(isChecked);
+  const FULL_TIME = "https://jobs.github.com/positions.json?description=python&full_time=true&location=sf";
+  const NEW_YORK = "https://jobs.github.com/positions.json?description=python&location=new+york";
+  const LONDON = "https://jobs.github.com/positions.json?description=python&location=london";
+  const AMSTERDAM = "https://jobs.github.com/positions.json?description=python&location=amsterdam";
+  const BERLIN = "https://jobs.github.com/positions.json?description=python&location=berlin";
 
-  function handleTheFullTimeJob(e) {
-    const {
-      name,
-      type,
-      checked
-    } = e.target;
-    type === "checkbox" && setIsChecked({
-      [name]: checked
-    });
-    const filteredTheFullTimeJob = githubJobs.filter(githubJob => githubJob.type !== "Full time");
-    console.log(filteredTheFullTimeJob);
-    dispatch({
-      type: "FULL_TIME",
-      filteredTheFullTimeJob
-    });
+  async function handleTheFullTimeJob(e) {
+    const inputFullTime = e.target;
+
+    if (inputFullTime.checked) {
+      const res = await fetch(_GithubJobs.CORS + FULL_TIME);
+      const filteredTheFullTimeJob = await res.json();
+      console.log(filteredTheFullTimeJob);
+      dispatch({
+        type: "FULL_TIME",
+        filteredTheFullTimeJob
+      });
+    }
   }
 
   (0, _react.useEffect)(() => {
@@ -36012,15 +36039,63 @@ function Options() {
     });
   }, [city]);
 
-  function handleChange(e) {
-    const {
-      name,
-      type,
-      checked
-    } = e.target;
-    type === "checkbox" && setIsChecked({
-      [name]: checked
-    });
+  async function handleLondonJob(e) {
+    const inputLondon = e.target;
+
+    if (inputLondon.checked) {
+      const res = await fetch(_GithubJobs.CORS + LONDON);
+      const filteredLondonJob = await res.json();
+      console.log(filteredLondonJob);
+      dispatch({
+        type: "LONDON",
+        filteredLondonJob
+      });
+    }
+  }
+
+  async function handleAmsterdamJob(e) {
+    const inputAmsterdam = e.target;
+
+    if (inputAmsterdam.checked) {
+      const res = await fetch(_GithubJobs.CORS + AMSTERDAM);
+      const filteredAmsterdamJob = await res.json();
+      console.log(filteredAmsterdamJob);
+      dispatch({
+        type: "AMSTERDAM",
+        filteredAmsterdamJob
+      });
+    }
+  }
+
+  async function handleDefaultChecked(e) {
+    const inputDefault = e.target;
+    console.log(inputDefault);
+
+    if (inputDefault.checked) {
+      const res = await fetch(_GithubJobs.CORS + NEW_YORK);
+      const data = await res.json();
+      console.log(data);
+      dispatch({
+        type: "DEFAULT",
+        data
+      });
+    }
+  }
+
+  async function handleBerlinJob(e) {
+    const inputBerlin = e.target;
+    console.log(inputBerlin);
+
+    if (inputBerlin.checked) {
+      const res = await fetch(_GithubJobs.CORS + BERLIN);
+      console.log(res);
+      const filteredBerlinJob = await res.json();
+      console.log(filteredBerlinJob);
+      dispatch({
+        type: "BERLIN",
+        filteredBerlinJob
+      });
+    }
   }
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
@@ -36036,31 +36111,31 @@ function Options() {
   })), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "checkbox",
     name: "london",
-    onChange: handleChange
+    onChange: handleLondonJob
   }), /*#__PURE__*/_react.default.createElement("label", null, "London")), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "checkbox",
     name: "amsterdam",
-    onChange: handleChange
+    onChange: handleAmsterdamJob
   }), /*#__PURE__*/_react.default.createElement("label", null, "Amsterdam")), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "checkbox",
-    name: "newWork",
-    onChange: handleChange
-  }), /*#__PURE__*/_react.default.createElement("label", null, "New Work")), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
+    name: "newYork",
+    onChange: handleDefaultChecked
+  }), /*#__PURE__*/_react.default.createElement("label", null, "New York")), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "checkbox",
     name: "berlin",
-    onChange: handleChange
+    onChange: handleBerlinJob
   }), /*#__PURE__*/_react.default.createElement("label", null, "Berlin"))));
 }
 
 var _default = Options;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../components/GithubJobs":"components/GithubJobs.js","../pages/GithubJobsContext":"pages/GithubJobsContext.js"}],"components/GithubJobs.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../pages/GithubJobsContext":"pages/GithubJobsContext.js","../components/GithubJobs":"components/GithubJobs.js"}],"components/GithubJobs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = exports.CORS = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -36081,7 +36156,8 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 const CORS = "https://cors-anywhere.herokuapp.com/";
-const API = "https://jobs.github.com/positions.json?search=node";
+exports.CORS = CORS;
+const API = "https://jobs.github.com/positions.json?markdown=true";
 
 function GithubJobs() {
   const {
@@ -36232,7 +36308,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62588" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65284" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

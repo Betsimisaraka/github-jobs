@@ -5,12 +5,13 @@ import { UlStyle } from '../pages/style';
 import GithubJobsHeader from '../pages/GithubJobsHeader';
 import Options from '../pages/Options';
 
-const CORS = "https://cors-anywhere.herokuapp.com/";
-const API = "https://jobs.github.com/positions.json?search=node";
+export const CORS = "https://cors-anywhere.herokuapp.com/";
+const API = "https://jobs.github.com/positions.json?markdown=true";
 
 function GithubJobs() {
     const { state, dispatch } = useContext(GlobalContext);
     const { githubJobs, isLoading } = state;
+
     console.log(githubJobs);
 
     useEffect(() => {

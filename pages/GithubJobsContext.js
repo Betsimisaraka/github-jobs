@@ -5,10 +5,16 @@ const GlobalContext = createContext();
 function GithubJobsContext({ children }) {
     const [state, dispatch] = useReducer((state, action) => {
         switch(action.type) {
-            case "FETCH_JOBS": {
+            case "DEFAULT": {
                 return {
                     ...state,
                     isLoading: false,
+                    githubJobs: action.data
+                }
+            }
+            case "FETCH_JOBS": {
+                return {
+                    ...state,
                     githubJobs: action.githubJob
                 }
             }
@@ -28,6 +34,24 @@ function GithubJobsContext({ children }) {
                 return {
                     ...state,
                     githubJobs: action.filteredTheCityJob
+                }
+            }
+            case "LONDON": {
+                return {
+                    ...state,
+                    githubJobs: action.filteredLondonJob
+                }
+            }
+            case "AMSTERDAM": {
+                return {
+                    ...state,
+                    githubJobs: action.filteredAmsterdamJob
+                }
+            }
+            case "BERLIN": {
+                return {
+                    ...state,
+                    githubJobs: action.filteredBerlinJob
                 }
             }
         }
