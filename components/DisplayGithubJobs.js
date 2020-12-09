@@ -2,9 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {GithubJobsStyle} from '../pages/style';
 import { AiOutlineClockCircle } from 'react-icons/ai';
+import { formatDistance } from 'date-fns';
 
 
 function DisplayGithubJobs({ githubJob }) {
+
+    const dateFormated = (date) => {
+        return formatDistance(new Date(date), new Date());
+    }
+    
     return (
         <Link to={`/details/${githubJob.id}`}>
             <GithubJobsStyle>
@@ -15,7 +21,7 @@ function DisplayGithubJobs({ githubJob }) {
                     <p className="type">{githubJob.type}</p>
                 </div>
                 <p className="location-city location">{githubJob.location}</p>
-                <p className="creation"><AiOutlineClockCircle /> {githubJob.created_at}</p>
+                <p className="creation"><AiOutlineClockCircle />{dateFormated(githubJob.created_at)} ago</p>
             </GithubJobsStyle>
         </Link>
     )

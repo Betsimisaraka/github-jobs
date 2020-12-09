@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Betsimisaraka/github-jobs#readme",
   "dependencies": {
+    "date-fns": "^2.16.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
@@ -27,6 +28,6 @@
     "sass": "^1.30.0"
   },
   "browserslist": [
-		"last 1 Chrome versions"
-	]
+    "last 1 Chrome versions"
+  ]
 }

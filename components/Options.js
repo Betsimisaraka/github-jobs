@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {GlobalContext} from '../pages/GithubJobsContext';
-import { CORS } from '../components/GithubJobs';
 
 function Options({ filter }) {
 

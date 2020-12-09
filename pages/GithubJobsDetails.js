@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { GlobalContext } from '../pages/GithubJobsContext';
+import { GlobalContext } from './GithubJobsContext';
 import { AiOutlineClockCircle } from 'react-icons/ai';
+import { formatDistance } from 'date-fns';
 
 function GithubJobsDetails() {
     const { id } = useParams();
@@ -9,7 +10,11 @@ function GithubJobsDetails() {
 
     const { state } = useContext(GlobalContext);
     const { githubJobs } = state;
-    console.log(githubJobs);
+
+    const dateFormated = (date) => {
+        return formatDistance(new Date(date), new Date());
+    }
+    
 
     const findTheSameId = githubJobs.find(githubJob => githubJob.id !== id);
     console.log(findTheSameId);
@@ -25,7 +30,7 @@ function GithubJobsDetails() {
                 <div className="title_type_creation">
                     <h2 className="detail_title">{findTheSameId.title}</h2>
                     <p className="type detail_type">{findTheSameId.type}</p>
-                    <p className="creation detail_creation"><AiOutlineClockCircle /> {findTheSameId.created_at}</p>
+                    <p className="creation detail_creation"><AiOutlineClockCircle /> {dateFormated(findTheSameId.created_at)} ago</p>
                 </div>
                 <div className="logo_company_location">
                     <img className="detail_logo" src={findTheSameId.company_logo} alt={`Logo of this componey ${findTheSameId.company}`} />

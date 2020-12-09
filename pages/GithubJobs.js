@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { GlobalContext } from '../pages/GithubJobsContext';
+import { GlobalContext } from './GithubJobsContext';
 import DisplayGithubJobs from '../components/DisplayGithubJobs';
-import { UlStyle } from '../pages/style';
-import GithubJobsHeader from '../pages/GithubJobsHeader';
-import Options from '../pages/Options';
+import { UlStyle } from './style';
+import GithubJobsHeader from '../components/GithubJobsHeader';
+import Options from '../components/Options';
 
 export const CORS = "https://cors-anywhere.herokuapp.com/";
 

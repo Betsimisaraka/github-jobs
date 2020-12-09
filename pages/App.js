@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import GithubJobs from '../components/GithubJobs'; 
-import GithubJobsDetails from '../components/GithubJobsDetails';
+import GithubJobs from '../pages/GithubJobs'; 
+import GithubJobsDetails from '../pages/GithubJobsDetails';
 
 function App() {
     return (
