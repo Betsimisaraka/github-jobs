@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { GlobalContext } from '../pages/GithubJobsContext';
+import { AiOutlineClockCircle } from 'react-icons/ai';
 
 function GithubJobsDetails() {
     const { id } = useParams();
@@ -24,7 +25,7 @@ function GithubJobsDetails() {
                 <div className="title_type_creation">
                     <h2 className="detail_title">{findTheSameId.title}</h2>
                     <p className="type detail_type">{findTheSameId.type}</p>
-                    <p className="creation detail_creation">{findTheSameId.created_at}</p>
+                    <p className="creation detail_creation"><AiOutlineClockCircle /> {findTheSameId.created_at}</p>
                 </div>
                 <div className="logo_company_location">
                     <img className="detail_logo" src={findTheSameId.company_logo} alt={`Logo of this componey ${findTheSameId.company}`} />

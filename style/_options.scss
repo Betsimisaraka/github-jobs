@@ -33,6 +33,13 @@
     background: #FFFFFF;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
     border-radius: 4px;
-    padding: 17px 14px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-left: 32px;
+    padding-right: 14px;
     border: none;
+    background-image: url('../assets/public.svg');
+    background-repeat: no-repeat;
+    background-size: 1rem;
+    background-position: 2% 50%;
 }

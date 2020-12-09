@@ -20,7 +20,7 @@ function GithubJobsHeader() {
     return (
         <div className="header_container">
             <form className="header_form" onSubmit={handleSubmit}>
-                {/* <fieldset className="header_fieldset"> */}
+                <fieldset className="header_fieldset">
                     <input className="header_input" 
                         type="text"
                         value={value}
@@ -28,7 +28,7 @@ function GithubJobsHeader() {
                         onChange={e => setValue(e.target.value)} 
                         placeholder="Title, companies, expertise or benefits" />
                     <button className="header_button">Search</button> 
-                {/* </fieldset> */}
+                </fieldset>
             </form>
         </div>
     )

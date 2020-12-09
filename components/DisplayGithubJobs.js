@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {GithubJobsStyle} from '../pages/style';
+import { AiOutlineClockCircle } from 'react-icons/ai';
 
 
 function DisplayGithubJobs({ githubJob }) {
@@ -14,7 +15,7 @@ function DisplayGithubJobs({ githubJob }) {
                     <p className="type">{githubJob.type}</p>
                 </div>
                 <p className="location-city location">{githubJob.location}</p>
-                <p className="creation">{githubJob.created_at}</p>
+                <p className="creation"><AiOutlineClockCircle /> {githubJob.created_at}</p>
             </GithubJobsStyle>
         </Link>
     )
