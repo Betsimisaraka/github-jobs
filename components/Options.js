@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {GlobalContext} from '../pages/GithubJobsContext';
 
-function Options({ filter }) {
+function Options() {
 
-    const { state, dispatch } = useContext(GlobalContext);
-    const { githubJobs } = state;
+    const { dispatch } = useContext(GlobalContext);
 
     const [location, setLocation] = useState('');
     const [selectedCities, setSelectedCities] = useState(null);
@@ -48,24 +47,31 @@ function Options({ filter }) {
         <div>
             <form className="options_form">
                 <fieldset>
-                    <input type="checkbox" name="fullTime" checked={fullTime} onChange={handleClick} />
+                    <input type="checkbox" 
+                        name="fullTime"
+                        checked={fullTime} 
+                        onChange={handleClick} 
+                    />
                     <label>Full time</label>
                 </fieldset>
                 <fieldset className="options_location">
                     <label className="options_location-label">Location</label>
                     <input className="options_location-input" type="text" 
-                        value={location} name="location" 
+                        value={location} 
+                        name="location" 
                         onChange={e => setLocation(e.target.value)} 
                         placeholder="City, state, zip code or country" 
-                        onKeyDown={handleLocation} />
+                        onKeyDown={handleLocation}
+                    />
                 </fieldset>
                 <div>
                     {cities.map(city => (
                         <fieldset key={city.id}>    
                             <input 
-                            type="checkbox" 
-                            checked={selectedCities ? city.id === selectedCities.id: false} 
-                            onChange={() => handleCity(city)} />
+                                type="checkbox" 
+                                checked={selectedCities ? city.id === selectedCities.id: false} 
+                                onChange={() => handleCity(city)} 
+                            />
                             <label>{city.city}</label>
                         </fieldset>
                     ))}

@@ -16,7 +16,7 @@ function GithubJobsDetails() {
     }
     
 
-    const findTheSameId = githubJobs.find(githubJob => githubJob.id !== id);
+    const findTheSameId = githubJobs.find(githubJob => githubJob.id === id);
     console.log(findTheSameId);
 
     return (

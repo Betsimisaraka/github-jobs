@@ -5,9 +5,16 @@
     padding-top: 42px;
 }
 
+.no_results {
+    text-align: center;
+}
+
 @media (min-width: 1000px) {
     .main_container {
         flex-direction: row;
         padding-top: 42px;
     }
+    .no_results {
+        text-align: center;
+    }    
 }

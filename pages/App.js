@@ -2,11 +2,12 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import GithubJobs from '../pages/GithubJobs'; 
 import GithubJobsDetails from '../pages/GithubJobsDetails';
+import Footer from '../components/Footer';
 
 function App() {
     return (
         <div>
-            <h1>Github jobs</h1>
+            <h1>Github <span className="jobs">jobs</span></h1>
             <Switch>
                 <Route exact path="/">
                     <GithubJobs />
@@ -15,6 +16,7 @@ function App() {
                     <GithubJobsDetails />
                 </Route>
             </Switch>
+            <Footer />
         </div>
     )
 }

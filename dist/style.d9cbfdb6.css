@@ -16,6 +16,12 @@ a {
   text-decoration: none;
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .type {
   font-family: "Roboto";
   font-style: normal;
@@ -50,6 +56,15 @@ a {
   font-size: 12px;
   line-height: 14px;
   color: #B7BCCE;
+}
+
+.jobs {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 36px;
+  color: #282538;
 }
 
 .header_container {
@@ -111,7 +126,7 @@ a {
     margin-left: auto;
   }
 }
-ul li {
+.githubjob_lists li {
   padding: 12px;
   background: #FFFFFF;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
@@ -120,13 +135,13 @@ ul li {
   grid-template-columns: repeat(3, 1fr);
   row-gap: 17px;
 }
-ul li .logo {
+.githubjob_lists li .logo {
   grid-column: 1/2;
 }
-ul li .info_container {
+.githubjob_lists li .info_container {
   grid-column: 2/4;
 }
-ul li .info_container .company {
+.githubjob_lists li .info_container .company {
   font-family: "Roboto";
   font-style: normal;
   font-weight: bold;
@@ -134,7 +149,7 @@ ul li .info_container .company {
   line-height: 14px;
   color: #334680;
 }
-ul li .info_container .title {
+.githubjob_lists li .info_container .title {
   font-family: "Roboto";
   font-style: normal;
   font-weight: normal;
@@ -142,35 +157,35 @@ ul li .info_container .title {
   line-height: 21px;
   color: #334680;
 }
-ul li .location-city {
+.githubjob_lists li .location-city {
   grid-column: 2/3;
   align-self: end;
 }
-ul li .creation {
+.githubjob_lists li .creation {
   grid-column: 3/4;
   align-self: end;
 }
 
-ul {
+.githubjob_lists {
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 32px;
 }
 
 @media (min-width: 1000px) {
-  ul li {
+  .githubjob_lists li {
     grid-template-columns: repeat(7, 1fr);
   }
-  ul li .logo {
+  .githubjob_lists li .logo {
     grid-column: 1/2;
   }
-  ul li .info_container {
+  .githubjob_lists li .info_container {
     grid-column: 2/6;
   }
-  ul li .location-city {
+  .githubjob_lists li .location-city {
     grid-column: 6/7;
   }
-  ul li .creation {
+  .githubjob_lists li .creation {
     grid-column: 7/8;
   }
 }
@@ -181,10 +196,18 @@ ul {
   padding-top: 42px;
 }
 
+.no_results {
+  text-align: center;
+}
+
 @media (min-width: 1000px) {
   .main_container {
     flex-direction: row;
     padding-top: 42px;
+  }
+
+  .no_results {
+    text-align: center;
   }
 }
 .options_form fieldset {
@@ -319,6 +342,58 @@ ul {
   .details .details_container {
     grid-column: 2/8;
   }
+}
+.pagination {
+  margin: 32px auto;
+  display: flex;
+  outline: none;
+}
+
+.pagination > li + li {
+  margin-left: 12px;
+}
+
+.pagination > .active > a {
+  background-color: #47ccde;
+  border-color: #47ccde;
+  color: #fff;
+}
+
+.pagination > li > a {
+  border: 1px solid #B7BCCE;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+  background-color: #47ccde;
+  border-color: #47ccde;
+  outline: none;
+}
+
+.pagination > li > a, .pagination > li > span {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  color: #B9BDCF;
+}
+
+.footer {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #B9BDCF;
+  text-align: center;
+  padding-top: 32px;
+  padding-bottom: 15px;
 }
 
 /*# sourceMappingURL=/style.d9cbfdb6.css.map */
