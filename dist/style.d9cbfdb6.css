@@ -7,13 +7,45 @@ body {
   border-radius: 12px;
 }
 
-p {
+p, h3 {
   margin: 0;
   padding: 0;
 }
 
 a {
   text-decoration: none;
+}
+
+.type {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  color: #334680;
+  border: 1px solid #334680;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 6px 8px;
+  width: 70px;
+}
+
+.location {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #B9BDCF;
+}
+
+.creation {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #B7BCCE;
 }
 
 .header_container {
@@ -92,38 +124,13 @@ ul li .info_container .title {
   line-height: 21px;
   color: #334680;
 }
-ul li .info_container .type {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 14px;
-  color: #334680;
-  border: 1px solid #334680;
-  box-sizing: border-box;
-  border-radius: 4px;
-  padding: 6px 8px;
-  width: 70px;
-}
 ul li .location-city {
   grid-column: 2/3;
   align-self: end;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
-  color: #B9BDCF;
 }
 ul li .creation {
   grid-column: 3/4;
   align-self: end;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
-  color: #B7BCCE;
 }
 
 ul {
@@ -197,6 +204,96 @@ ul {
   border-radius: 4px;
   padding: 17px 14px;
   border: none;
+}
+
+.details .more_info .go_back {
+  font-family: "sPoppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #1E86FF;
+  padding-left: 15px;
+}
+.details .more_info .apply {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: uppercase;
+  color: #B9BDCF;
+  padding-top: 36px;
+  padding-bottom: 16px;
+}
+.details .more_info .link {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #334680;
+  padding-bottom: 36px;
+}
+
+.detail_title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #334680;
+}
+
+.logo_company_location {
+  padding-top: 34px;
+  padding-bottom: 34px;
+  display: grid;
+  grid-template-columns: repeat(2, 100px);
+}
+
+.detail_logo {
+  grid-column: 1/2;
+  grid-row: 1/3;
+  width: 50px;
+  height: 50px;
+}
+
+.detail_company {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: #334680;
+  padding-bottom: 10px;
+}
+
+.detail_creation {
+  padding-top: 10px;
+}
+
+.description {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
+  color: #334680;
+}
+
+@media (min-width: 1000px) {
+  .details {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    column-gap: 77px;
+  }
+  .details .more_info {
+    grid-column: 1/2;
+  }
+  .details .details_container {
+    grid-column: 2/8;
+  }
 }
 
 /*# sourceMappingURL=/style.d9cbfdb6.css.map */

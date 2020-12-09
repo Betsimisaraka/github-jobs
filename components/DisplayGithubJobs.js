@@ -13,7 +13,7 @@ function DisplayGithubJobs({ githubJob }) {
                     <h2 className="title">{githubJob.title}</h2>
                     <p className="type">{githubJob.type}</p>
                 </div>
-                <p className="location-city">{githubJob.location}</p>
+                <p className="location-city location">{githubJob.location}</p>
                 <p className="creation">{githubJob.created_at}</p>
             </GithubJobsStyle>
         </Link>

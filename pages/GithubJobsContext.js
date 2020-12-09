@@ -5,12 +5,6 @@ const GlobalContext = createContext();
 function GithubJobsContext({ children }) {
     const [state, dispatch] = useReducer((state, action) => {
         switch(action.type) {
-            case "DEFAULT": {
-                return {
-                    ...state,
-                    githubJobs: action.data
-                }
-            }
             case "FETCH_JOBS": {
                 return {
                     ...state,
@@ -24,34 +18,28 @@ function GithubJobsContext({ children }) {
                     githubJobs: action.filteredGithubJobs
                 }
             }
-            case  "FULL_TIME": {
+            case  "fulltime": {
                 return {
                     ...state,
-                    githubJobs: action.filteredTheFullTimeJob
+                    fulltime: action.value
                 }
             }
-            case  "CITY": {
+            case  "location": {
                 return {
                     ...state,
-                    githubJobs: action.filteredTheCityJob
+                    location: action.value
                 }
             }
-            case "LONDON": {
+            case "description": {
                 return {
                     ...state,
-                    githubJobs: action.filteredLondonJob
+                    description: action.value
                 }
             }
-            case "AMSTERDAM": {
+            case "city": {
                 return {
                     ...state,
-                    githubJobs: action.filteredAmsterdamJob
-                }
-            }
-            case "BERLIN": {
-                return {
-                    ...state,
-                    githubJobs: action.filteredBerlinJob
+                    githubJobs: action.value
                 }
             }
         }
@@ -59,7 +47,11 @@ function GithubJobsContext({ children }) {
     }, {
         isLoading: true,
         githubJobs: [],
+        location: 'New York',
+        description: '',
+        fulltime: false,
     })
+
     return (
         <GlobalContext.Provider value={{ state, dispatch }}>
             {children}

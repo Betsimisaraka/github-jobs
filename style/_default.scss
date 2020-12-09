@@ -7,11 +7,43 @@ body {
     border-radius: 12px;
 }
 
-p {
+p, h3 {
     margin: 0;
     padding: 0;
 }
 
 a {
     text-decoration: none;
+}
+
+.type {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    color: #334680;
+    border: 1px solid #334680;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 6px 8px;
+    width: 70px;
+}
+
+.location {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: #B9BDCF;
+}
+
+.creation {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: #B7BCCE;
 }

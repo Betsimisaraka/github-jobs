@@ -33876,13 +33876,6 @@ function GithubJobsContext({
 }) {
   const [state, dispatch] = (0, _react.useReducer)((state, action) => {
     switch (action.type) {
-      case "DEFAULT":
-        {
-          return { ...state,
-            githubJobs: action.data
-          };
-        }
-
       case "FETCH_JOBS":
         {
           return { ...state,
@@ -33898,38 +33891,31 @@ function GithubJobsContext({
           };
         }
 
-      case "FULL_TIME":
+      case "fulltime":
         {
           return { ...state,
-            githubJobs: action.filteredTheFullTimeJob
+            fulltime: action.value
           };
         }
 
-      case "CITY":
+      case "location":
         {
           return { ...state,
-            githubJobs: action.filteredTheCityJob
+            location: action.value
           };
         }
 
-      case "LONDON":
+      case "description":
         {
           return { ...state,
-            githubJobs: action.filteredLondonJob
+            description: action.value
           };
         }
 
-      case "AMSTERDAM":
+      case "city":
         {
           return { ...state,
-            githubJobs: action.filteredAmsterdamJob
-          };
-        }
-
-      case "BERLIN":
-        {
-          return { ...state,
-            githubJobs: action.filteredBerlinJob
+            githubJobs: action.value
           };
         }
     }
@@ -33937,7 +33923,10 @@ function GithubJobsContext({
     return state;
   }, {
     isLoading: true,
-    githubJobs: []
+    githubJobs: [],
+    location: 'New York',
+    description: '',
+    fulltime: false
   });
   return /*#__PURE__*/_react.default.createElement(GlobalContext.Provider, {
     value: {
@@ -35929,7 +35918,7 @@ function DisplayGithubJobs({
   }, githubJob.title), /*#__PURE__*/_react.default.createElement("p", {
     className: "type"
   }, githubJob.type)), /*#__PURE__*/_react.default.createElement("p", {
-    className: "location-city"
+    className: "location-city location"
   }, githubJob.location), /*#__PURE__*/_react.default.createElement("p", {
     className: "creation"
   }, githubJob.created_at)));
@@ -36012,9 +36001,9 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function Options() {
-  const [city, setCity] = (0, _react.useState)('');
-  const [checked, setChecked] = (0, _react.useState)(true);
+function Options({
+  filter
+}) {
   const {
     state,
     dispatch
@@ -36022,99 +36011,67 @@ function Options() {
   const {
     githubJobs
   } = state;
-  const FULL_TIME = "https://jobs.github.com/positions.json?description=python&full_time=true&location=sf";
-  const NEW_YORK = "https://jobs.github.com/positions.json?description=python&location=new+york";
-  const LONDON = "https://jobs.github.com/positions.json?description=python&location=london";
-  const AMSTERDAM = "https://jobs.github.com/positions.json?description=python&location=amsterdam";
-  const BERLIN = "https://jobs.github.com/positions.json?description=python&location=berlin";
+  const [location, setLocation] = (0, _react.useState)('');
+  const [selectedCities, setSelectedCities] = (0, _react.useState)(null);
+  const [fullTime, setFullTime] = (0, _react.useState)(false);
+  let cities = [{
+    id: 1,
+    city: "London"
+  }, {
+    id: 2,
+    city: "Amsterdam"
+  }, {
+    id: 3,
+    city: "New york"
+  }, {
+    id: 4,
+    city: "Berling"
+  }];
 
-  async function handleTheFullTimeJob(e) {
-    const inputFullTime = e.target;
+  function handleClick() {
+    setFullTime(!fullTime);
+    dispatch({
+      type: "fulltime",
+      value: true
+    });
+  }
 
-    if (inputFullTime.checked) {
-      const res = await fetch(_GithubJobs.CORS + FULL_TIME);
-      const filteredTheFullTimeJob = await res.json();
-      console.log(filteredTheFullTimeJob);
+  function handleCity(city) {
+    if (selectedCities && city.id === selectedCities.id) {
+      setSelectedCities(null);
       dispatch({
-        type: "FULL_TIME",
-        filteredTheFullTimeJob
+        type: "location",
+        value: ""
+      });
+    } else {
+      setSelectedCities(city);
+      dispatch({
+        type: "location",
+        value: city.city
+      });
+    }
+  }
+
+  function handleLocation(e) {
+    if (e.key === "Enter") {
+      setSelectedCities(null);
+      dispatch({
+        type: "location",
+        value: location
       });
     }
   }
 
   (0, _react.useEffect)(() => {
-    const filteredTheCityJob = githubJobs.filter(githubJob => githubJob.location.toLowerCase().includes(city.toLowerCase()));
-    dispatch({
-      type: "CITY",
-      filteredTheCityJob
-    });
-  }, [city]);
-
-  async function handleLondonJob(e) {
-    const inputLondon = e.target;
-
-    if (inputLondon.checked) {
-      const res = await fetch(_GithubJobs.CORS + LONDON);
-      const filteredLondonJob = await res.json();
-      console.log(filteredLondonJob);
-      dispatch({
-        type: "LONDON",
-        filteredLondonJob
-      });
-    }
-  }
-
-  async function handleAmsterdamJob(e) {
-    const inputAmsterdam = e.target;
-
-    if (inputAmsterdam.checked) {
-      const res = await fetch(_GithubJobs.CORS + AMSTERDAM);
-      const filteredAmsterdamJob = await res.json();
-      console.log(filteredAmsterdamJob);
-      dispatch({
-        type: "AMSTERDAM",
-        filteredAmsterdamJob
-      });
-    }
-  }
-
-  async function handleDefaultChecked(e) {
-    const inputDefault = e.target;
-    console.log(inputDefault);
-
-    if (inputDefault.checked) {
-      const res = await fetch(_GithubJobs.CORS + NEW_YORK);
-      const data = await res.json();
-      console.log(data);
-      dispatch({
-        type: "DEFAULT",
-        data
-      });
-    }
-  }
-
-  async function handleBerlinJob(e) {
-    const inputBerlin = e.target;
-    console.log(inputBerlin);
-
-    if (inputBerlin.checked) {
-      const res = await fetch(_GithubJobs.CORS + BERLIN);
-      console.log(res);
-      const filteredBerlinJob = await res.json();
-      console.log(filteredBerlinJob);
-      dispatch({
-        type: "BERLIN",
-        filteredBerlinJob
-      });
-    }
-  }
-
+    setSelectedCities(cities[2]);
+  }, []);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("form", {
     className: "options_form"
   }, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "checkbox",
     name: "fullTime",
-    onChange: handleTheFullTimeJob
+    checked: fullTime,
+    onChange: handleClick
   }), /*#__PURE__*/_react.default.createElement("label", null, "Full time")), /*#__PURE__*/_react.default.createElement("fieldset", {
     className: "options_location"
   }, /*#__PURE__*/_react.default.createElement("label", {
@@ -36122,27 +36079,18 @@ function Options() {
   }, "Location"), /*#__PURE__*/_react.default.createElement("input", {
     className: "options_location-input",
     type: "text",
-    value: city,
+    value: location,
     name: "location",
-    onChange: e => setCity(e.target.value),
-    placeholder: "City, state, zip code or country"
-  })), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
+    onChange: e => setLocation(e.target.value),
+    placeholder: "City, state, zip code or country",
+    onKeyDown: handleLocation
+  })), /*#__PURE__*/_react.default.createElement("div", null, cities.map(city => /*#__PURE__*/_react.default.createElement("fieldset", {
+    key: city.id
+  }, /*#__PURE__*/_react.default.createElement("input", {
     type: "checkbox",
-    name: "london",
-    onChange: handleLondonJob
-  }), /*#__PURE__*/_react.default.createElement("label", null, "London")), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "checkbox",
-    name: "amsterdam",
-    onChange: handleAmsterdamJob
-  }), /*#__PURE__*/_react.default.createElement("label", null, "Amsterdam")), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "checkbox",
-    name: "newYork",
-    onChange: handleDefaultChecked
-  }), /*#__PURE__*/_react.default.createElement("label", null, "New York")), /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "checkbox",
-    name: "berlin",
-    onChange: handleBerlinJob
-  }), /*#__PURE__*/_react.default.createElement("label", null, "Berlin"))));
+    checked: selectedCities ? city.id === selectedCities.id : false,
+    onChange: () => handleCity(city)
+  }), /*#__PURE__*/_react.default.createElement("label", null, city.city))))));
 }
 
 var _default = Options;
@@ -36175,7 +36123,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 const CORS = "https://cors-anywhere.herokuapp.com/";
 exports.CORS = CORS;
-const API = "https://jobs.github.com/positions.json?markdown=true";
 
 function GithubJobs() {
   const {
@@ -36184,13 +36131,17 @@ function GithubJobs() {
   } = (0, _react.useContext)(_GithubJobsContext.GlobalContext);
   const {
     githubJobs,
-    isLoading
+    isLoading,
+    location,
+    description,
+    fullTime
   } = state;
-  console.log(githubJobs);
   (0, _react.useEffect)(() => {
     setTimeout(() => {
       async function fetchData() {
-        const response = await fetch(CORS + API);
+        const CORS = "https://cors-anywhere.herokuapp.com/";
+        const URL_API = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fullTime}&markdown=true`;
+        const response = await fetch(CORS + URL_API);
         const data = await response.json();
         dispatch({
           type: "FETCH_JOBS",
@@ -36200,13 +36151,13 @@ function GithubJobs() {
 
       fetchData();
     }, 500);
-  }, []);
+  }, [description, fullTime, location]);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_GithubJobsHeader.default, null), /*#__PURE__*/_react.default.createElement("div", {
     className: "main_container"
-  }, /*#__PURE__*/_react.default.createElement(_Options.default, null), isLoading && 'Loading...', /*#__PURE__*/_react.default.createElement(_style.UlStyle, null, !isLoading && githubJobs.map(githubJob => /*#__PURE__*/_react.default.createElement(_DisplayGithubJobs.default, {
+  }, /*#__PURE__*/_react.default.createElement(_Options.default, null), isLoading && 'Loading...', /*#__PURE__*/_react.default.createElement(_style.UlStyle, null, !isLoading && githubJobs.length > 0 && githubJobs.map(githubJob => /*#__PURE__*/_react.default.createElement(_DisplayGithubJobs.default, {
     key: githubJob.id,
     githubJob: githubJob
-  })))));
+  })), !isLoading && githubJobs.length === 0 && /*#__PURE__*/_react.default.createElement("p", null, "No results found"))));
 }
 
 var _default = GithubJobs;
@@ -36252,7 +36203,11 @@ function GithubJobsDetails() {
     className: "go_back"
   }, "\u2B05 Back to search")), /*#__PURE__*/_react.default.createElement("p", {
     className: "apply"
-  }, "How to upply"), /*#__PURE__*/_react.default.createElement("p", null, findTheSameId.how_to_apply)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+  }, "How to upply"), /*#__PURE__*/_react.default.createElement("p", {
+    className: "link"
+  }, findTheSameId.how_to_apply)), /*#__PURE__*/_react.default.createElement("div", {
+    className: "details_container"
+  }, /*#__PURE__*/_react.default.createElement("div", {
     className: "title_type_creation"
   }, /*#__PURE__*/_react.default.createElement("h2", {
     className: "detail_title"
@@ -36269,7 +36224,7 @@ function GithubJobsDetails() {
   }), /*#__PURE__*/_react.default.createElement("h3", {
     className: "detail_company"
   }, findTheSameId.company), /*#__PURE__*/_react.default.createElement("p", {
-    className: "detail_location"
+    className: "detail_location location"
   }, findTheSameId.location)), /*#__PURE__*/_react.default.createElement("p", {
     className: "description"
   }, findTheSameId.description)));
@@ -36350,7 +36305,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65284" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61646" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

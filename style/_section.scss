@@ -27,39 +27,14 @@ ul li {
             line-height: 21px;
             color: #334680;
         }
-        & .type {
-            font-family: 'Roboto';
-            font-style: normal;
-            font-weight: bold;
-            font-size: 12px;
-            line-height: 14px;
-            color: #334680;
-            border: 1px solid #334680;
-            box-sizing: border-box;
-            border-radius: 4px;
-            padding: 6px 8px;
-            width: 70px;
-        }
     }
     & .location-city {
         grid-column: 2 / 3;
         align-self: end;
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 14px;
-        color: #B9BDCF;
     }
     & .creation {
         grid-column: 3/4;
         align-self: end;
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 14px;
-        color: #B7BCCE;
     }
 }
 

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../pages/GithubJobsContext';
 import DisplayGithubJobs from '../components/DisplayGithubJobs';
 import { UlStyle } from '../pages/style';
@@ -6,24 +6,23 @@ import GithubJobsHeader from '../pages/GithubJobsHeader';
 import Options from '../pages/Options';
 
 export const CORS = "https://cors-anywhere.herokuapp.com/";
-const API = "https://jobs.github.com/positions.json?markdown=true";
 
 function GithubJobs() {
     const { state, dispatch } = useContext(GlobalContext);
-    const { githubJobs, isLoading } = state;
-
-    console.log(githubJobs);
+    const { githubJobs, isLoading, location, description, fullTime } = state;
 
     useEffect(() => {
         setTimeout(() => {
             async function fetchData() {
-                const response = await fetch(CORS + API);
+                const CORS = "https://cors-anywhere.herokuapp.com/";
+                const URL_API = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fullTime}&markdown=true`;
+                const response = await fetch(CORS + URL_API);
                 const data = await response.json();
                 dispatch({ type: "FETCH_JOBS", githubJob: data });
             }
             fetchData();
         }, 500);
-    }, [])
+    }, [ description, fullTime, location ]);
 
     return (
         <div>
@@ -32,10 +31,12 @@ function GithubJobs() {
                 <Options />
                 {isLoading && 'Loading...'}
                 <UlStyle>
-                    {!isLoading && 
+                    {!isLoading && githubJobs.length > 0 &&
                     githubJobs.map(githubJob => (
                         <DisplayGithubJobs key={githubJob.id} githubJob={githubJob} />
                     ))}
+                    {!isLoading && githubJobs.length === 0 && 
+                     <p>No results found</p> }
                 </UlStyle>
             </div>
         </div>
