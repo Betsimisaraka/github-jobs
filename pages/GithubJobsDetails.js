@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { GlobalContext } from './GithubJobsContext';
 import { AiOutlineClockCircle } from 'react-icons/ai';
-import { formatDistance } from 'date-fns';
+import  dateFormated from '../components/DateForamted';
 
 function GithubJobsDetails() {
     const { id } = useParams();
@@ -10,12 +10,8 @@ function GithubJobsDetails() {
 
     const { state } = useContext(GlobalContext);
     const { githubJobs } = state;
-
-    const dateFormated = (date) => {
-        return formatDistance(new Date(date), new Date());
-    }
     
-
+    //find the same id to get the explicit information
     const findTheSameId = githubJobs.find(githubJob => githubJob.id === id);
     console.log(findTheSameId);
 

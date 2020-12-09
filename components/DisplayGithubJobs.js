@@ -2,14 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {GithubJobsStyle} from '../pages/style';
 import { AiOutlineClockCircle } from 'react-icons/ai';
-import { formatDistance } from 'date-fns';
-
+import  dateFormated from '../components/DateForamted';
 
 function DisplayGithubJobs({ githubJob }) {
-
-    const dateFormated = (date) => {
-        return formatDistance(new Date(date), new Date());
-    }
     
     return (
         <Link to={`/details/${githubJob.id}`}>

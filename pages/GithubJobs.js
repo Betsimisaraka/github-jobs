@@ -16,13 +16,16 @@ function GithubJobs() {
     const [perPage] = useState(5);
     const [countPage, setCountPage] = useState(0);
 
+    const CORS = "https://cors-anywhere.herokuapp.com/";
+    const URL_API = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fullTime}&markdown=true`;
+
+//Fetching from the api
     useEffect(() => {
         setTimeout(() => {
             async function fetchData() {
-                const CORS = "https://cors-anywhere.herokuapp.com/";
-                const URL_API = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fullTime}&markdown=true`;
                 const response = await fetch(CORS + URL_API);
                 const data = await response.json();
+                //Sharing into five each page
                 setCountPage(Math.ceil(data.length / perPage));
                 dispatch({ type: "FETCH_JOBS", githubJob: data });
             }
