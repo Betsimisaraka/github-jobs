@@ -1,7 +1,9 @@
 .pagination {
-    margin: 32px auto;
+    margin-top: 32px;
+    margin-bottom: 100px;
     display: flex;
     outline: none;
+    align-self: flex-end;
   }
 
 .pagination > li + li {
@@ -14,7 +16,6 @@
     color: #fff;
   }
   .pagination > li > a{
-    // border: 1px solid #47ccde ;
     border: 1px solid #B7BCCE;
     box-sizing: border-box;
     border-radius: 4px;
@@ -29,7 +30,6 @@
 }
 
 .pagination > li > a, .pagination > li > span {
-    // color: #47ccde;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: normal;
@@ -38,7 +38,3 @@
     text-align: center;
     color: #B9BDCF;
 }
-
-// .pagination > li:nth-child(1) > a, .pagination > li:nth-child(1) > span, .pagination > li:last-child > a, .pagination > li:last-child > span {
-//     border-radius: unset;
-// }

@@ -1,61 +1,23 @@
 # Github Jobs
 
-Here we are, the last graded project of this semester.
+In this project the challenge was to create a job search using an API, and use React to handle the frontend. 
 
-Your challenge: Create a job search using an API, and use React to handle the frontend. Don’t look at the existing solution. Fulfill user stories below:
+I also have to apply a few concept we learned in class, such as a **reducer** and a global **context**. And the  bonus was the **compound component**.
 
-![image](./assets/1.png)
-![image](./assets/2.png)
-![image](./assets/3.png)
 
-- User story: I can see a list of jobs in a city by default
-- User story: I can search for jobs with a given keyword
-- User story: I can search for jobs with a city name, zip code or other location
-- User story: I can select one option from at least 4 pre-defined options
-- User story: I can search for a full-time job only
-- User story: I can see a list of jobs with their logo, company name, location, and posted time.
-- User story: When I select a job, I can see job descriptions and how to apply like the given design.
-- User story: When I am on the job details page, I can go back to the search page
-- User story (optional): I can see a list of jobs in the closest city from my location by default
-- User story (optional): I can see jobs in different pages, 5 items each page
-
-You’ll also have to apply a few concept we learned in class, such as a **reducer** and a global **context**. And there will be a bonus for those who can find a use case for a **compound component**.
-
-**Icon**: https://google.github.io/material-design-icons/ (you can also use the react-icons package)
-
-**API**: https://jobs.github.com/api. Use data from the API to create questions and answers.
-
-*If you get some CORS errors, you can use https://cors-anywhere.herokuapp.com/ to help with accessing data from other websites that are normally forbidden by the same-origin policy of web browsers*
-
-**Design** : https://www.figma.com/file/gAkVx9CdOqnJcCjJ7nVNkw
-
-**Live app** : https://jolly-heisenberg-20c49e.netlify.app/
-
-Once you completed, polish a nice readme submit your solutions on this link : https://forms.gle/Xg6kJMKmrBkyTe3TA, by providing URLs for both GitHub repository and live app on Netlify.
-
-For the custom domain url you'll enter in netlify, please use the following naming convention : **github-jobs-_YOUR_FIRSTNAME_.netlify.app** (replace YOUR_FIRSTNAME by your firstname)
-
-Good luck everybody!
-
-Template for your readme :
-
-<!-- Please update value in the {}  -->
-
-<h1 align="center">{Your project name}</h1>
+<h1 align="center">Github Jobs</h1>
 
 <div align="center">
   <h3>
-    <a href="https://{your-demo-link.your-domain}">
+    <a href="https://github.com/Betsimisaraka/github-jobs">
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
+    <a href="https://github-jobs-anita.netlify.app/">
       Solution
     </a>
   </h3>
 </div>
-
-<!-- TABLE OF CONTENTS -->
 
 ## Table of Contents
 
@@ -70,16 +32,43 @@ Template for your readme :
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+This is how my finish project look like.
 
-Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
+![My first page](./assets/my-first-page.png)
+![the details of a github jobs](./assets/my-second-page.png)
 
 -   Where can I see your demo?
+
+You can see my demo in [Betsimisaraka](https://github.com/Betsimisaraka/github-jobs) Github
 -   What was your experience?
+
+My experiance was really good and useful with my project. Firstly, I fetch from the data from the API and display the data to the dom, then I did the pagination and the filtering.
+
 -   In a few sentences, explain the structure of your project.
+
+Firstly, I did this project with react including `Context` and `useReducer` together and there are few `useState` and `useEffect` as well also with `router`. I have completed this application with all of those things I mentioned above.
+
+Scondly, there is an index.html file, index,js file which contains many children inside and style folder in which I put my styles. I did the style with scss. I also have some inline styles in some files which made by the styled-components dependency.
+
+Thirdly, to make my code better and easy to read I shared the project into two components or folders: 
+
+  1. The first one is pages component. This components have five files in it. Those five files are App.js, githubJobs.js, GithubJobsContext.js, GithubJobsDetails.js and style.js. These files are the main focus in this application. 
+
+  2. And the second one is the components folder which cover all the files such as header, footer and etc, inside of this folder also I displaied the github jobs by mapping through the data.   
+
 -   If you had more time, what area of your project would you improve?
+
+If I had more time I would have improved my filter in the form input because I didn't manage to finish that.
+Also I would have done the compound components section because I didn 't finish that one two. Lastly, I would have done a better css style with my project.
+
 -   Did you learn anything new while working on this project?
+
+Definetly, I have never known pagination before but with this project I did pagination and it work fine. Also fetching with usereduser was quite new for me but I made it work.
+
 -   What was the most challenging part for you?
+
+Fetching the API with useReducer was quite challenging part for me because We haven't done many of them before. Not only that but also the pagination part was a bit difficult as well.
+
 -   Any other comments?
 
 
@@ -89,10 +78,23 @@ Introduce your projects by taking a screenshot or a gif. Try to tell visitors a 
 <!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
 
 -   [React](https://reactjs.org/)
+-   [Sass]()
+-   [Html]()
 
 ## Features
 
-<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
+These are the user stories that we had to fulfilled:
+
+- I can see a list of jobs in a city by default
+- I can search for jobs with a given keyword
+- I can search for jobs with a city name, zip code or other location
+- I can select one option from at least 4 pre-defined options
+- I can search for a full-time job only
+- I can see a list of jobs with their logo, company name, location, and posted time.
+- When I select a job, I can see job descriptions and how to apply like the given design.
+- When I am on the job details page, I can go back to the search page
+- (optional): I can see a list of jobs in the closest city from my location by default
+- (optional): I can see jobs in different pages, 5 items each page
 
 ## How To Use
 
@@ -102,12 +104,13 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/your-user-name/your-project-name
+$ git clone https://github.com/Betsimisaraka/github-jobs
 
 # Install dependencies
-$ npm install
+$ npm install react react-dom react-router-dom styled-components date-fns react-paginate
 
 # Run the app
+$ parcel index.html
 $ npm start
 ```
 
@@ -118,4 +121,4 @@ $ npm start
 ## Contact
 
 -   Website [your-website.com](https://{your-web-site-link})
--   GitHub [@your-username](https://{github.com/your-usermame})
+-   GitHub [Betsimisaraka](https://github.com/Betsimisaraka/github-jobs)

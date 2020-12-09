@@ -42,27 +42,25 @@ function GithubJobs() {
             <GithubJobsHeader />
             <div className="main_container">    
                 <Options />
-                {isLoading && 'Loading...'}
-                <UlStyle className="githubjob_lists">
-                    {!isLoading && githubJobs.length > 0 &&
-                    sliceGithubJobs.map(githubJob => (
-                        <DisplayGithubJobs key={githubJob.id} githubJob={githubJob} />
-                    ))}
-                    {!isLoading && githubJobs.length === 0 && 
-                     <p className="no_results">No results found</p> }
-                </UlStyle>
-                <ReactPaginate
-                    previousLabel={"<"}
-                    nextLabel={">"}
-                    breakLabel={"..."}
-                    breakClassName={"break-me"}
-                    pageCount={countPage}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={handleClick}
-                    containerClassName={"pagination"}
-                    subContainerClassName={"pages pagination"}
-                    activeClassName={"active"}/>
+                <div className="content_container">     
+                    {isLoading && 'Loading...'}
+                    <UlStyle className="githubjob_lists">
+                        {!isLoading && githubJobs.length > 0 &&
+                        sliceGithubJobs.map(githubJob => (
+                            <DisplayGithubJobs key={githubJob.id} githubJob={githubJob} />
+                        ))}
+                        {!isLoading && githubJobs.length === 0 && 
+                        <p className="no_results">No results found</p> }
+                    </UlStyle>
+                    <ReactPaginate
+                        previousLabel={"<"}
+                        nextLabel={">"}
+                        breakLabel={"..."}
+                        pageCount={countPage}
+                        onPageChange={handleClick}
+                        containerClassName={"pagination"}
+                        activeClassName={"active"}/>
+                </div>
             </div>
         </div>
     )

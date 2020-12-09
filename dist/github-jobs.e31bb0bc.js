@@ -70937,7 +70937,9 @@ function GithubJobs() {
   const sliceGithubJobs = githubJobs.slice(offset, offset + perPage);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_GithubJobsHeader.default, null), /*#__PURE__*/_react.default.createElement("div", {
     className: "main_container"
-  }, /*#__PURE__*/_react.default.createElement(_Options.default, null), isLoading && 'Loading...', /*#__PURE__*/_react.default.createElement(_style.UlStyle, {
+  }, /*#__PURE__*/_react.default.createElement(_Options.default, null), /*#__PURE__*/_react.default.createElement("div", {
+    className: "content_container"
+  }, isLoading && 'Loading...', /*#__PURE__*/_react.default.createElement(_style.UlStyle, {
     className: "githubjob_lists"
   }, !isLoading && githubJobs.length > 0 && sliceGithubJobs.map(githubJob => /*#__PURE__*/_react.default.createElement(_DisplayGithubJobs.default, {
     key: githubJob.id,
@@ -70948,15 +70950,11 @@ function GithubJobs() {
     previousLabel: "<",
     nextLabel: ">",
     breakLabel: "...",
-    breakClassName: "break-me",
     pageCount: countPage,
-    marginPagesDisplayed: 2,
-    pageRangeDisplayed: 5,
     onPageChange: handleClick,
     containerClassName: "pagination",
-    subContainerClassName: "pages pagination",
     activeClassName: "active"
-  })));
+  }))));
 }
 
 var _default = GithubJobs;
